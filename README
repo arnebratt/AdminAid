@@ -1,7 +1,0 @@
-eZ Publish extension AdminAid...
-
-Functionality to log in as any user from admin user, without password. 
-Also gives a detailed overview of content object data, an easy interface
-for translation of content classes, functionality for searching for
-id's in the database, as well as a list of content objects based on 
-specified class.

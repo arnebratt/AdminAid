@@ -1,3 +1,6 @@
+AdminAid Usage
+=============
+
 o What is AdminAid
 
 AdminAid started as a simple module to be able to switch users
@@ -10,41 +13,6 @@ More functionality may come in the future.
 I do not recommend using this extension on live servers for more
 than a limited timespan. It does represent a potential security
 risk, even though in theory it should be secure. You are hereby warned.
-
-
-o License
-
-GNU General Public License v2.0
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of version 2.0  of the GNU General
-Public License as published by the Free Software Foundation.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-
-o Requirements
-
-Tested on eZ Publish 4.1, 4.2 and 4.3, should work on 
-most versions.
-
-
-o Installation
-
-Extract extension to the extension/adminaid/ directory.
-Activate the new extension by adding it in 
-settings/override/site.ini.append.php like this:
-
-[ExtensionSettings]
-ActiveExtensions[]=adminaid
-
-Clear cache.
-
-Add access to the module/views for any users who need to use
-this functionality.
 
 
 o Using the AdminAid extension
@@ -111,3 +79,4 @@ This means that another person can edit the class at the same time that
 you do translations on it, which might create a conflict. Also, every
 time you press the "Ok" or "Apply" buttons, the new translations are
 immediately published and available to the system.
+
