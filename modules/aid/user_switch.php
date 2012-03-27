@@ -1,15 +1,38 @@
 <?php
+/**
+ * File containing the aid/user_switch module view.
+ *
+ * @copyright Copyright (C) 2010 - 2012 A.Bakkeboe. All rights reserved.
+ * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
+ * @version //autogentag//
+ * @package adminaid
+ */
 
-$http = eZHTTPTool::instance();
-
+/**
+ * Default module parameters
+ */
 $Module = $Params['Module'];
 $user_id = intval( $Params['user_id'] );
+
+/**
+ * Default user information
+ */
+$http = eZHTTPTool::instance();
 $user = eZUser::currentUser();
+
+/**
+ * Default settings user switch limit
+ */
 $ini = eZINI::instance( 'aid.ini' );
 $user_limit = $ini->variable( 'Aid', 'UserSwitchIDLimit' );
 
 # IP filter check
+$user_limit = $ini->variable( 'Aid', 'UserSwitchIDLimit' );
 $limit_by_ip = $ini->variable( 'Aid', 'LimitByIP' ) == 'enabled';
+
+/**
+ * IP filter check
+ */
 if ( $limit_by_ip )
 {
     $ip_list = $ini->variable( 'Aid', 'IPList' );
@@ -20,6 +43,9 @@ if ( $limit_by_ip )
     }
 }
 
+/**
+ * Redirect
+ */
 if ( !empty( $user_id ) AND in_array( $user->attribute( 'contentobject_id' ), $user_limit ) )
 {
     $new_user = eZUser::fetch( $user_id );

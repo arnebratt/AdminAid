@@ -1,9 +1,26 @@
 <?php
+/**
+ * File containing the aid/object_view module view.
+ *
+ * @copyright Copyright (C) 2010 - 2012 A.Bakkeboe. All rights reserved.
+ * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
+ * @version //autogentag//
+ * @package adminaid
+ */
 
-require_once( 'kernel/common/template.php' );
-$tpl = templateInit();
-
+/**
+ * Default http parameters
+ */
 $http = eZHTTPTool::instance();
+ 
+/**
+ * Define module view template
+ */
+$tpl = eZTemplate::factory();
+
+/**
+ * Define module view template
+ */
 $Module = $Params['Module'];
 $object_id = intval( $Params['object_id'] );
 

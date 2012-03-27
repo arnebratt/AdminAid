@@ -1,15 +1,34 @@
 <?php
+/**
+ * File containing the aid/class_translation module view.
+ *
+ * @copyright Copyright (C) 2010 - 2012 A.Bakkeboe. All rights reserved.
+ * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
+ * @version //autogentag//
+ * @package adminaid
+ */
 
-require_once( 'kernel/common/template.php' );
-$tpl = templateInit();
-
+/**
+ * Default http parameters
+ */
 $http = eZHTTPTool::instance();
+
+/**
+ * Define module view template
+ */
+$tpl = eZTemplate::factory();
+
+/**
+ * Default module view parameters
+ */
 $Module = $Params['Module'];
 $class_id = intval( $Params['class_id'] );
 $from_attribute_id = intval( $Params['from_attribute_id'] );
 $to_attribute_id = intval( $Params['to_attribute_id'] );
 
-// Fetch selected class and database language list
+/**
+ * Fetch selected class and database language list
+ */
 if ( is_numeric( $class_id ) )
 {
     $class = eZContentClass::fetch( $class_id );
@@ -25,7 +44,10 @@ if ( is_numeric( $class_id ) )
     $class_attribute_list = eZContentClassAttribute::fetchListByClassID( $class_id, eZContentClass::VERSION_STATUS_DEFINED );
     foreach ( $class_attribute_list as $class_attribute )
     {
-        // Forward to select attribute to copy translation from
+
+        /**
+         * Forward to select attribute to copy translation from
+         */
         if ( $http->hasVariable( 'CopyClassAttribute'.$class_attribute->attribute( 'id' ) ) )
         {
             $Module->redirectTo( "aid/class_attribute_select/$class_id/".$class_attribute->attribute( 'id' ) );
@@ -40,7 +62,9 @@ else
     return $Module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel' );
 }
 
-// Add new language for this class to database
+/**
+ * Add new language for this class to database
+ */
 if ( $http->hasVariable( 'AddLanguage' ) )
 {
     $language_list = $http->variable( 'LanguageList' );
@@ -56,11 +80,16 @@ if ( $http->hasVariable( 'AddLanguage' ) )
         $row['name'] = '';
         $row['language_id'] = $lang[0];
         $row['language_locale'] = $lang[1];
-        // Add class name record
+
+        /**
+         * Add class name record
+         */
         $class_name = new eZContentClassName( $row );
         $class_name->store();
 
-        // Adjust class record
+        /**
+         * Adjust class record
+         */
         $class->setAttribute( 'language_mask', $class->attribute( 'language_mask' )|$lang[0] );
         $class->setName( '', $lang[1] );
         $class->store();
@@ -70,7 +99,9 @@ if ( $http->hasVariable( 'AddLanguage' ) )
     return;
 }
 
-// Store specified class names in database
+/**
+ * Store specified class names in database
+ */
 if ( $http->hasVariable( 'Store' ) OR $http->hasVariable( 'Save' ) )
 {
     foreach ( $class_name_list as $class_name )
@@ -98,14 +129,19 @@ if ( $http->hasVariable( 'Store' ) OR $http->hasVariable( 'Save' ) )
         }
     }
 }
-// Forward to class view page if Store or Cancel
+
+/**
+ * Forward to class view page if Store or Cancel
+ */
 if ( $http->hasVariable( 'Store' ) OR $http->hasVariable( 'Cancel' ) )
 {
     $Module->redirectTo( "class/view/$class_id" );
     return;
 }
 
-// Fill our attribute with text from a selected attribute
+/**
+ * Fill our attribute with text from a selected attribute
+ */
 if ( $from_attribute_id > 0 )
 {
     $from_attribute = eZContentClassAttribute::fetch( $from_attribute_id );
