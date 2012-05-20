@@ -34,6 +34,11 @@ settings/override/site.ini.append.php like this:
 ActiveExtensions[]=adminaid
 
 
+o Settings
+
+Have a look at the settings/aid.ini.append.php file for more settings you can customize.
+
+
 Clear cache.
 
 Add access to the module/views for any users who need to use this functionality.
